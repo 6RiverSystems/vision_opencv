@@ -36,9 +36,9 @@
 #include "boost/endian/conversion.hpp"
 
 #include <map>
+#include <regex>
 
 #include <boost/make_shared.hpp>
-#include <boost/regex.hpp>
 
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -97,15 +97,15 @@ int getCvType(const std::string& encoding)
   if (encoding == enc::YUV422) return CV_8UC2;
 
   // Check all the generic content encodings
-  boost::cmatch m;
+  std::smatch m;
 
-  if (boost::regex_match(encoding.c_str(), m,
-        boost::regex("(8U|8S|16U|16S|32S|32F|64F)C([0-9]+)"))) {
+  if (std::regex_search(encoding, m,
+        std::regex("(8U|8S|16U|16S|32S|32F|64F)C([0-9]+)"))) {
     return CV_MAKETYPE(depthStrToInt(m[1].str()), atoi(m[2].str().c_str()));
   }
 
-  if (boost::regex_match(encoding.c_str(), m,
-        boost::regex("(8U|8S|16U|16S|32S|32F|64F)"))) {
+  if (std::regex_search(encoding, m,
+        std::regex("(8U|8S|16U|16S|32S|32F|64F)"))) {
     return CV_MAKETYPE(depthStrToInt(m[1].str()), 1);
   }
 
