@@ -47,7 +47,7 @@ class TestConversions(unittest.TestCase):
     def test_encode_decode_cv2_compressed(self):
         import numpy as np
         # from: http://docs.opencv.org/2.4/modules/highgui/doc/reading_and_writing_images_and_video.html#Mat imread(const string& filename, int flags)
-        formats = ["jpg", "jpeg", "jpe", "png", "bmp", "dib", "ppm", "pgm", "pbm",
+        formats = ["jpg", "jpeg", "jpe", "png", "bmp", "dib",
                    "jp2", "sr", "ras", "tif", "tiff"]  # this formats rviz is not support
 
         cvb_en = CvBridge()
